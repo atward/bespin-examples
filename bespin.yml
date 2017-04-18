@@ -21,7 +21,7 @@ stacks:
   # example:
   #   stack_yaml: "{config_root}/example.yaml"
   #   stack_json: "{config_root}/example.json"
-  #   params_yaml: "{config_root}/{environment}/example-params.yaml"
+  #   params_yaml: {}
   #   params_json: "{config_root}/{environment}/example-params.json"
   #   role_name: "custom-cloudformation-role"
   #   build_first: []
@@ -32,7 +32,7 @@ stacks:
     # stack_name is stack key name if not specified
     stack_yaml: "{config_root}/user.yaml"
     stack_policy: "{config_root}/stack_policy.json"
-    params_yaml: {}
+    params_json: "params.json"
 
     tags:
       tags_at_stack: stack
@@ -45,7 +45,6 @@ stacks:
   b:
     stack_name: "b-custom"
     stack_yaml: "{config_root}/user.yaml"
-    params_yaml: {}
 
   c:
     build_first:
@@ -53,14 +52,13 @@ stacks:
     build_after:
     - d
     stack_yaml: "{config_root}/user.yaml"
-    params_yaml: {}
 
   d:
     stack_yaml: "{config_root}/user.yaml"
-    params_yaml: {}
 
-  user:
-    params_yaml: {}
+  # everything default :mindblown:
+  user: {}
+
 
 
 bespin:
