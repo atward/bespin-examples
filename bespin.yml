@@ -1,0 +1,72 @@
+---
+
+## Put in ~/.bespin.yml
+# environments:
+#   poc:
+#     account_id: 12345678
+#     tags:
+#       tag_at_env: env_override
+#       environment: "{environment}"
+
+vars:
+  config1: value from bespin.yml
+  myexample: my example variable
+
+plans:
+  some:
+  - a
+  - c
+
+stacks:
+  # example:
+  #   stack_yaml: "{config_root}/example.yaml"
+  #   stack_json: "{config_root}/example.json"
+  #   params_yaml: "{config_root}/{environment}/example-params.yaml"
+  #   params_json: "{config_root}/{environment}/example-params.json"
+  #   role_name: "custom-cloudformation-role"
+  #   build_first: []
+  #   build_after: []
+  #
+
+  a:
+    # stack_name is stack key name if not specified
+    stack_yaml: "{config_root}/user.yaml"
+    stack_policy: "{config_root}/stack_policy.json"
+    params_yaml: {}
+
+    tags:
+      tags_at_stack: stack
+      keyexample: "_key_name_X refers to the key '{_key_name_0}' and its parents '{_key_name_1}', '{_key_name_2}'"
+
+    poc:
+      tags:
+        tag_env_override: stack_env_override
+
+  b:
+    stack_name: "b-custom"
+    stack_yaml: "{config_root}/user.yaml"
+    params_yaml: {}
+
+  c:
+    build_first:
+    - b
+    build_after:
+    - d
+    stack_yaml: "{config_root}/user.yaml"
+    params_yaml: {}
+
+  d:
+    stack_yaml: "{config_root}/user.yaml"
+    params_yaml: {}
+
+  user:
+    params_yaml: {}
+
+
+bespin:
+  # Extra config files can be loaded. These are deep-merged in the order listed.
+  # This file's definitions override any values in extra_files
+  extra_files:
+  - config2.yml
+  extra_imports:
+  - ["{config_root}", "custom"]

@@ -1,0 +1,12 @@
+---
+# This gets deep merged
+
+vars:
+  config1: value from config2.yml
+  config2: value from config2.yml
+
+# bespin.extra_files can be recursive
+# overrides are depth first, keeping in mind that the current file overrides any extra_files
+# bespin:
+#   extra_files:
+#     - config3.yaml
