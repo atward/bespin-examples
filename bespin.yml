@@ -22,6 +22,7 @@ stacks:
   #   stack_yaml: "{config_root}/example.yaml"
   #   stack_json: "{config_root}/example.json"
   #   params_yaml: {}
+  #   params_yaml: "{config_root}/{environment}/example-params.yaml"
   #   params_json: "{config_root}/{environment}/example-params.json"
   #   role_name: "custom-cloudformation-role"
   #   build_first: []
@@ -32,7 +33,7 @@ stacks:
     # stack_name is stack key name if not specified
     stack_yaml: "{config_root}/user.yaml"
     stack_policy: "{config_root}/stack_policy.json"
-    params_json: "params.json"
+    params_json: "{config_root}/params.json"
 
     tags:
       tags_at_stack: stack
@@ -45,6 +46,7 @@ stacks:
   b:
     stack_name: "b-custom"
     stack_yaml: "{config_root}/user.yaml"
+    # params_json: "{config_root}/{environment}/{_key_name_1}-params.json"
 
   c:
     build_first:
@@ -57,6 +59,19 @@ stacks:
 
   d:
     stack_yaml: "{config_root}/user.yaml"
+    # params_yaml: "{config_root}/{environment}/{_key_name_1}-params.yaml"
+
+  e:
+    stack_yaml: "{config_root}/user.yaml"
+    vars:
+      # obtaining the output from another stack can be done via variable
+      # var_name: ["stack name in AWS", "output key in stack"]
+      b_output: ["{stacks.b.stack_name}", "Output"]
+    # Ensure b is built first so we get the latest output
+    build_first:
+    - b
+    params_yaml:
+      Input: XXX_B_OUTPUT_XXX
 
   # everything default :mindblown:
   user: {}
@@ -67,6 +82,6 @@ bespin:
   # Extra config files can be loaded. These are deep-merged in the order listed.
   # This file's definitions override any values in extra_files
   extra_files:
-  - config2.yml
+  - "{config_root}/config2.yml"
   extra_imports:
   - ["{config_root}", "custom"]

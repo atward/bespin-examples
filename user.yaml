@@ -13,4 +13,6 @@ Resources:
 
 Outputs:
   Output:
-    Value: !Ref Input
+    Value: !Sub
+    - "Ouput from stack '${AWS::StackName}', input param '${Input}'"
+    - Input: !Ref Input
