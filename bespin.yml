@@ -52,6 +52,8 @@ stacks:
     build_after:
     - d
     stack_yaml: "{config_root}/user.yaml"
+    params_yaml:
+      Input: from bespin.yml
 
   d:
     stack_yaml: "{config_root}/user.yaml"
