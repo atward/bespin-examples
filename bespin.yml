@@ -38,10 +38,12 @@ stacks:
     tags:
       tags_at_stack: stack
       keyexample: "_key_name_X refers to the key '{_key_name_0}' and its parents '{_key_name_1}', '{_key_name_2}'"
+      region: "{region}"
 
     poc:
       tags:
         tag_env_override: stack_env_override
+        environment_region: "{environments.poc.region}"
 
   b:
     stack_name: "b-custom"
