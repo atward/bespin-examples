@@ -5,6 +5,18 @@ vars:
   config1: value from config2.yml
   config2: value from config2.yml
 
+env:
+- USER
+
+stacks:
+  e:
+    stack_name: "e-from-config2-for-{{USER}}"
+    stack_name_env:
+    - USER
+
+  user:
+    stack_yaml: "{:config_dir}/user-custom.yaml"
+
 # bespin.extra_files can be recursive
 # overrides are depth first, keeping in mind that the current file overrides any extra_files
 # bespin:

@@ -1,0 +1,20 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "IAM::User - customised"
+
+Parameters:
+  Input:
+    Type: String
+    Default: default
+
+Resources:
+  CustomUser:
+    Type: "AWS::IAM::User"
+
+Outputs:
+  Output:
+    Value: !Sub
+    - "Ouput from stack '${AWS::StackName}', input param '${Input}'"
+    - Input: !Ref Input
+  CustomUser:
+    Value: !Ref CustomUser

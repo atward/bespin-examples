@@ -84,6 +84,6 @@ bespin:
   # Extra config files can be loaded. These are deep-merged in the order listed.
   # This file's definitions override any values in extra_files
   extra_files:
-  - "{config_root}/config2.yml"
+  - config2.yml
   extra_imports:
   - ["{config_root}", "custom"]
